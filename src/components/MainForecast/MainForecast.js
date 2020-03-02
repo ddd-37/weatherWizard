@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import WeatherIcon from "../WeatherIcon/WeatherIcon";
 
 const MainForecast = props => {
   console.log("props", props);
@@ -22,8 +23,11 @@ const MainForecast = props => {
       <div>
         <h2>{location}</h2>
         <div>
-          <span>Icon</span>
-          <span>{temperature}</span>
+          <WeatherIcon
+            icon={icon.replace("-", "_").toUpperCase()}
+            color={"#fff"}
+          />
+          <span>{Math.floor(temperature)}&#176;</span>
           <div>
             <span>F</span>
             <span>C</span>

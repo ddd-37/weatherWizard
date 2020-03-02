@@ -40,6 +40,7 @@ class App extends Component {
       )
     ]);
 
+    console.log(cityName.data);
     this.setState({
       loading: false,
       locationText: cityName.data.results[0].formatted_address,
