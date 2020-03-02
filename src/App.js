@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 
 import "./App.css";
+import MainForecast from "./components/MainForecast/MainForecast";
 
 class App extends Component {
   state = {
@@ -33,6 +34,7 @@ class App extends Component {
         `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&result_type=locality&key=AIzaSyCSRfDuPVjVUmKFmIEFs4oLJwwngrVylrk`
       ),
 
+      // TODO - this cors-anywhere.herokuapp.com seems hacky, need to find a more proper solution
       axios.get(
         `https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/b2522f8b48049f38fd4bf5045e5c908f/${latitude},${longitude}`
       )
@@ -54,7 +56,13 @@ class App extends Component {
 
   render() {
     if (this.state.loading) {
-      return <div className="App">Loading</div>;
+      return (
+        <div className="App">
+          <div className="spinner-border text-success" role="status">
+            <span className="sr-only">Loading...</span>
+          </div>
+        </div>
+      );
     }
 
     if (this.state.error) {
@@ -62,7 +70,15 @@ class App extends Component {
     }
 
     if (this.state.weatherData) {
-      return <div className="App">App Data</div>;
+      console.log(this.state);
+      return (
+        <div className="App container-md">
+          <MainForecast
+            location={this.state.locationText}
+            weatherData={this.state.weatherData.currently}
+          />
+        </div>
+      );
     }
   }
 }
