@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const MainForecast = props => {
   console.log("props", props);
@@ -15,6 +16,7 @@ const MainForecast = props => {
     visibility,
     dewPoint
   } = props.weatherData;
+
   return (
     <div>
       <div>
@@ -30,6 +32,11 @@ const MainForecast = props => {
       </div>
     </div>
   );
+};
+
+MainForecast.propTypes = {
+  location: PropTypes.string.isRequired,
+  weatherData: PropTypes.object.isRequired
 };
 
 export default MainForecast;
