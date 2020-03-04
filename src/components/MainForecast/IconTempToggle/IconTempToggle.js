@@ -6,12 +6,9 @@ import Temperature from "./../../UI/Temperature/Temperature";
 
 const IconTempToggle = ({ location, icon, temperature, summary, time }) => {
   return (
-    <div className="mb-4">
+    <div className="mb-4 text-center">
       <h2>{location}</h2>
-      <div
-        className="d-flex justify-content-center"
-        style={{ width: "15rem", margin: "auto" }}
-      >
+      <div className="d-flex" style={{ width: "15rem", margin: "auto" }}>
         <WeatherIcon
           icon={icon.replace(/-/g, "_").toUpperCase()}
           color={"#fff"}

@@ -15,7 +15,7 @@ const ForecastDetails = ({
   dewPoint
 }) => {
   return (
-    <div className="d-flex text-left align-items-center">
+    <div className="d-flex align-items-center justify-content-center">
       <div className="ml-md-5">
         <h6>
           Feels like <Temperature temp={apparentTemperature} />

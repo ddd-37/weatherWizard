@@ -3,6 +3,7 @@ import axios from "axios";
 
 import "./App.css";
 import MainForecast from "./components/MainForecast/MainForecast";
+import DailyForcast from "./components/DailyForecast/DailyForecast";
 
 class App extends Component {
   state = {
@@ -93,11 +94,12 @@ class App extends Component {
     if (this.state.weatherData) {
       console.log(this.state);
       return (
-        <div className="App container-md text-left">
+        <div className="App container-md p-2">
           <MainForecast
             location={this.state.locationText}
             weatherData={this.state.weatherData.currently}
           />
+          <DailyForcast />
         </div>
       );
     }

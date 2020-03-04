@@ -22,7 +22,7 @@ const MainForecast = props => {
   } = props.weatherData;
 
   return (
-    <div className="text-center d-md-flex align-items-center-md">
+    <div className="d-flex flex-column flex-md-row justify-content-center">
       <IconTempToggle
         location={location}
         icon={icon}
