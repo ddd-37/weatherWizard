@@ -1,9 +1,11 @@
 import React from "react";
+import moment from "moment";
+import PropTypes from "prop-types";
 import WeatherIcon from "../../../utils/WeatherIcon/WeatherIcon";
 
-const IconTempToggle = ({ location, icon, temperature, summary }) => {
+const IconTempToggle = ({ location, icon, temperature, summary, time }) => {
   return (
-    <>
+    <div>
       <h2>{location}</h2>
       <div
         className="d-flex justify-content-center"
@@ -23,7 +25,17 @@ const IconTempToggle = ({ location, icon, temperature, summary }) => {
         </div>
       </div>
       <h5>{summary}</h5>
-    </>
+      <h6>Updated at {moment(time * 1000).format("h:mm a")}</h6>
+    </div>
   );
 };
+
+IconTempToggle.propTypes = {
+  location: PropTypes.string.isRequired,
+  icon: PropTypes.string.isRequired,
+  temperature: PropTypes.number.isRequired,
+  summary: PropTypes.string.isRequired,
+  time: PropTypes.number.isRequired
+};
+
 export default IconTempToggle;
