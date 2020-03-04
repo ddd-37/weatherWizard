@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import WeatherIcon from "../WeatherIcon/WeatherIcon";
+
+import IconTempToggle from "./IconTempToggle/IconTempToggle";
 
 const MainForecast = props => {
   console.log("props", props);
@@ -19,21 +20,14 @@ const MainForecast = props => {
   } = props.weatherData;
 
   return (
-    <div>
-      <div>
-        <h2>{location}</h2>
-        <div>
-          <WeatherIcon
-            icon={icon.replace(/-/g, "_").toUpperCase()}
-            color={"#fff"}
-          />
-          <span>{Math.floor(temperature)}&#176;</span>
-          <div>
-            <span>F</span>
-            <span>C</span>
-          </div>
-        </div>
-      </div>
+    <div className="text-center">
+      <IconTempToggle
+        location={location}
+        icon={icon}
+        temperature={temperature}
+        summary={summary}
+        time={time}
+      />
     </div>
   );
 };

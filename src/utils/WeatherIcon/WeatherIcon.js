@@ -2,10 +2,10 @@ import React from "react";
 import ReactAnimatedWeather from "react-animated-weather";
 import { PropTypes } from "prop-types";
 
-const WeatherIcon = ({ icon, color }) => {
+const WeatherIcon = props => {
   return (
     <div>
-      <ReactAnimatedWeather icon={icon} color={color} />
+      <ReactAnimatedWeather {...props} />
     </div>
   );
 };
