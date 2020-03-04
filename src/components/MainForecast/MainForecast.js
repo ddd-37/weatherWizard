@@ -16,6 +16,7 @@ const MainForecast = props => {
     windSpeed,
     windBearing,
     pressure,
+    humidity,
     visibility,
     dewPoint
   } = props.weatherData;
@@ -37,6 +38,7 @@ const MainForecast = props => {
         pressure={pressure}
         visibility={visibility}
         dewPoint={dewPoint}
+        humidity={humidity}
       />
     </div>
   );
