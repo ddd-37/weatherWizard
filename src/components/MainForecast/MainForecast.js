@@ -24,7 +24,7 @@ const MainForecast = props => {
         <h2>{location}</h2>
         <div>
           <WeatherIcon
-            icon={icon.replace("-", "_").toUpperCase()}
+            icon={icon.replace(/-/g, "_").toUpperCase()}
             color={"#fff"}
           />
           <span>{Math.floor(temperature)}&#176;</span>
