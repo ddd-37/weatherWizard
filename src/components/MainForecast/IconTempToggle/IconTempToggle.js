@@ -6,7 +6,7 @@ import Temperature from "./../../UI/Temperature/Temperature";
 
 const IconTempToggle = ({ location, icon, temperature, summary, time }) => {
   return (
-    <div>
+    <div className="mb-4">
       <h2>{location}</h2>
       <div
         className="d-flex justify-content-center"

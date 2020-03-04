@@ -15,8 +15,8 @@ const ForecastDetails = ({
   dewPoint
 }) => {
   return (
-    <div className="d-flex">
-      <div>
+    <div className="d-flex text-left align-items-center">
+      <div className="ml-md-5">
         <h6>
           Feels like <Temperature temp={apparentTemperature} />
         </h6>
@@ -25,8 +25,8 @@ const ForecastDetails = ({
         </h6>
         <h6>Visibility {visibility} mi</h6>
       </div>
-      <div>
-        <h6>Barometer {(pressure * 0.02953).toFixed(2)} in</h6>
+      <div className="ml-5">
+        <h6>Barometer {Math.floor(pressure * 0.02953)}in</h6>
         <h6>Humidity {Math.floor(humidity * 100)}%</h6>
         <h6>
           Dewpoint <Temperature temp={dewPoint} />
