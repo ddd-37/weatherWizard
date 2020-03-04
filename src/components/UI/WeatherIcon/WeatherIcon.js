@@ -2,10 +2,15 @@ import React from "react";
 import ReactAnimatedWeather from "react-animated-weather";
 import { PropTypes } from "prop-types";
 
-const WeatherIcon = props => {
+const WeatherIcon = ({ icon, size, color }) => {
+  icon = icon.replace(/-/g, "_").toUpperCase();
   return (
     <div>
-      <ReactAnimatedWeather {...props} />
+      <ReactAnimatedWeather
+        icon={icon}
+        size={size || 50}
+        color={color || "#fff"}
+      />
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import moment from "moment";
 import PropTypes from "prop-types";
-import WeatherIcon from "../../../utils/WeatherIcon/WeatherIcon";
+import WeatherIcon from "../../UI/WeatherIcon/WeatherIcon";
 import Temperature from "./../../UI/Temperature/Temperature";
 
 const IconTempToggle = ({ location, icon, temperature, summary, time }) => {
@@ -9,11 +9,7 @@ const IconTempToggle = ({ location, icon, temperature, summary, time }) => {
     <div className="mb-4 text-center">
       <h2>{location}</h2>
       <div className="d-flex" style={{ width: "15rem", margin: "auto" }}>
-        <WeatherIcon
-          icon={icon.replace(/-/g, "_").toUpperCase()}
-          color={"#fff"}
-          size={60}
-        />
+        <WeatherIcon icon={icon} color={"#fff"} size={60} />
         <div className="flex-fill flex-grow-2">
           <h1>
             <Temperature temp={temperature} />

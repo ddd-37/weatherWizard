@@ -5,7 +5,6 @@ import IconTempToggle from "./IconTempToggle/IconTempToggle";
 import ForecastDetails from "./ForecastDetails/ForecastDetails";
 
 const MainForecast = props => {
-  console.log("props", props);
   const { location } = props;
   const {
     icon,
