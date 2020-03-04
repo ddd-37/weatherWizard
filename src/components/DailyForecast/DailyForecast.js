@@ -18,9 +18,11 @@ class DailyForcast extends Component {
     });
     console.log(this.props);
     return (
-      <div>
-        <h2>DailyForcast</h2>
-        <div className="d-flex justify-content-between">{days}</div>
+      <div className="d-flex flex-column align-items-center justify-content-center">
+        <h2>Daily Forcast</h2>
+        <div className="d-md-flex flex-md-row" style={{ minWidth: "20rem" }}>
+          {days}
+        </div>
       </div>
     );
   }
