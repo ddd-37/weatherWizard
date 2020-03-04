@@ -14,7 +14,7 @@ const IconTempToggle = ({ location, icon, temperature, summary, time }) => {
         <WeatherIcon
           icon={icon.replace(/-/g, "_").toUpperCase()}
           color={"#fff"}
-          size={50}
+          size={60}
         />
         <div className="flex-fill flex-grow-2">
           <h1>{Math.floor(temperature)}&#176;</h1>

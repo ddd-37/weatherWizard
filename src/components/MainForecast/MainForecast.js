@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import IconTempToggle from "./IconTempToggle/IconTempToggle";
+import ForecastDetails from "./ForecastDetails/ForecastDetails";
 
 const MainForecast = props => {
   console.log("props", props);
@@ -18,6 +19,7 @@ const MainForecast = props => {
     visibility,
     dewPoint
   } = props.weatherData;
+  const iconTempToggle = { icon, summary, time, temperature };
 
   return (
     <div className="text-center">
@@ -27,6 +29,14 @@ const MainForecast = props => {
         temperature={temperature}
         summary={summary}
         time={time}
+      />
+      <ForecastDetails
+        apparentTemperature={apparentTemperature}
+        windSpeed={windSpeed}
+        windBearing={windBearing}
+        pressure={pressure}
+        visibility={visibility}
+        dewPoint={dewPoint}
       />
     </div>
   );
