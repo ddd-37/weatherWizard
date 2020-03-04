@@ -2,6 +2,7 @@ import React from "react";
 import moment from "moment";
 import PropTypes from "prop-types";
 import WeatherIcon from "../../../utils/WeatherIcon/WeatherIcon";
+import Temperature from "./../../UI/Temperature/Temperature";
 
 const IconTempToggle = ({ location, icon, temperature, summary, time }) => {
   return (
@@ -17,7 +18,9 @@ const IconTempToggle = ({ location, icon, temperature, summary, time }) => {
           size={60}
         />
         <div className="flex-fill flex-grow-2">
-          <h1>{Math.floor(temperature)}&#176;</h1>
+          <h1>
+            <Temperature temp={temperature} />
+          </h1>
         </div>
         <div className="d-flex flex-column">
           <h5>F</h5>

@@ -3,6 +3,7 @@ import moment from "moment";
 import PropTypes from "prop-types";
 import WeatherIcon from "../../../utils/WeatherIcon/WeatherIcon";
 import WindSpeedDiretion from "./../../UI/WindSpeedDirection/WindSpeedDirection";
+import Temperature from "../../UI/Temperature/Temperature";
 
 const ForecastDetails = ({
   apparentTemperature,
@@ -14,9 +15,11 @@ const ForecastDetails = ({
   dewPoint
 }) => {
   return (
-    <div>
+    <div className="d-flex">
       <div>
-        <h6>Feels like {Math.floor(apparentTemperature)}&#176;</h6>
+        <h6>
+          Feels like <Temperature temp={apparentTemperature} />
+        </h6>
         <h6>
           Wind <WindSpeedDiretion speed={windSpeed} bearing={windBearing} />
         </h6>
@@ -24,7 +27,10 @@ const ForecastDetails = ({
       </div>
       <div>
         <h6>Barometer {(pressure * 0.02953).toFixed(2)} in</h6>
-        <h6>Humidity {humidity * 100}%</h6>
+        <h6>Humidity {Math.floor(humidity * 100)}%</h6>
+        <h6>
+          Dewpoint <Temperature temp={dewPoint} />
+        </h6>
       </div>
     </div>
   );

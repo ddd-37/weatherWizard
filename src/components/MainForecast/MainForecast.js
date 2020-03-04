@@ -20,7 +20,6 @@ const MainForecast = props => {
     visibility,
     dewPoint
   } = props.weatherData;
-  const iconTempToggle = { icon, summary, time, temperature };
 
   return (
     <div className="text-center">
