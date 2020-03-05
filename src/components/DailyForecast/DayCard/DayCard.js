@@ -10,7 +10,8 @@ const DayCard = ({
   temperatureLow,
   selected,
   dayToDisplay,
-  clicked
+  clicked,
+  isDesktop
 }) => {
   console.log(selected);
   return (
@@ -25,9 +26,11 @@ const DayCard = ({
           <Temperature temp={temperatureHigh} size={"1.5rem"} />{" "}
           <Temperature temp={temperatureLow} size={"1rem"} />
         </span>
-        <span>{selected ? "-" : "+"}</span>
+        {isDesktop || <span>{selected ? "-" : "+"}</span>}
       </div>
-      {selected && <DayDetails data={dayToDisplay} />}
+      {!isDesktop && selected && (
+        <DayDetails data={dayToDisplay} isDesktop={isDesktop} />
+      )}
     </div>
   );
 };
