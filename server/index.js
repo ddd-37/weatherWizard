@@ -42,19 +42,20 @@ app.get("/get/forecastdata", async (req, res) => {
     // TODO - This seems to only work for certain locations - need a better solution
 
     for (let i = 0; i < results[0].address_components.length; i++) {
-      // prettier-ignore
       for (let x = 0; x < results[0].address_components[i].types.length; x++) {
-              const type = results[0].address_components[i].types[x];
-              if (type === 'locality') { // Locality holds the city name
-                  city = results[0].address_components[i].long_name;
-                  break;
-              }
-  
-              if (type === 'administrative_area_level_1') { // administrative_area_level_1 holds the state
-                  state = results[0].address_components[i].long_name;
-                  break;
-              }
-          }
+        const type = results[0].address_components[i].types[x];
+        if (type === "locality") {
+          // Locality holds the city name
+          city = results[0].address_components[i].long_name;
+          break;
+        }
+
+        if (type === "administrative_area_level_1") {
+          // administrative_area_level_1 holds the state
+          state = results[0].address_components[i].long_name;
+          break;
+        }
+      }
     }
     console.log(typeof weatherData);
     let data = JSON.stringify(weatherData, getCircularReplacer());

@@ -50,9 +50,9 @@ class DailyForcast extends Component {
       );
     });
     return (
-      <div className="d-flex flex-column align-items-center justify-content-center">
+      <div className="container">
         <h2>Daily Forcast</h2>
-        <div className="d-md-flex flex-md-row" style={{ minWidth: "20rem" }}>
+        <div className="d-flex flex-column flex-md-row justify-content-around">
           {days}
         </div>
         {this.state.isDesktop && <DayDetails />}
