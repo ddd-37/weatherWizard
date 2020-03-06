@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const WindSpeedDiretion = ({ speed, bearing }) => {
   return (
@@ -14,6 +15,11 @@ const WindSpeedDiretion = ({ speed, bearing }) => {
       {speed} mph{" "}
     </span>
   );
+};
+
+WindSpeedDiretion.propTypes = {
+  speed: PropTypes.number.isRequired,
+  bearing: PropTypes.number.isRequired
 };
 
 export default WindSpeedDiretion;
