@@ -4,18 +4,18 @@ import Temperature from "../../UI/Temperature/Temperature";
 import DayDetails from "./../DayCard/DayDetails/DayDetails";
 
 const DayCard = ({
+  id,
   day,
   icon,
   temperatureHigh,
   temperatureLow,
   selected,
-  dayToDisplay,
   clicked,
-  isDesktop
+  isDesktop,
+  dataForDay
 }) => {
-  console.log(selected);
   return (
-    <div className=" border border-light m-1 p-2" onClick={clicked}>
+    <div className="border border-light m-1 p-2" id={id} onClick={clicked}>
       <div
         className="d-flex flex-row flex-md-column justify-content-between"
         style={{ minWidth: "5rem" }}
@@ -29,7 +29,7 @@ const DayCard = ({
         {isDesktop || <span>{selected ? "-" : "+"}</span>}
       </div>
       {!isDesktop && selected && (
-        <DayDetails data={dayToDisplay} isDesktop={isDesktop} />
+        <DayDetails data={dataForDay} isDesktop={isDesktop} />
       )}
     </div>
   );

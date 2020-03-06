@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import moment from "moment";
 import DayCard from "./DayCard/DayCard";
 import DayDetails from "./DayCard/DayDetails/DayDetails";
+import PropTypes from "prop-types";
 
 class DailyForcast extends Component {
   state = {
-    dayToDisplay: this.props.data[0].time,
+    daysData: this.props.data,
+    dayDetailToDisplay: this.props.data[0],
     isDesktop: false
   };
 
@@ -16,10 +18,17 @@ class DailyForcast extends Component {
 
   handleClickOnDay = e => {
     console.log(e.currentTarget);
+    this.setState({
+      dayDetailToDisplay: this.props.data[e.currentTarget.id]
+    });
   };
 
   findVewPortSize = () => {
     const currentWindow = window.innerWidth > 768;
+    console.log(
+      "DailyForcast -> findVewPortSize -> currentWindow",
+      currentWindow
+    );
 
     if (currentWindow !== this.state.isDesktop) {
       this.setState({
@@ -29,23 +38,20 @@ class DailyForcast extends Component {
   };
 
   render() {
-    console.log("isDesktop", this.state.isDesktop);
-    const days = this.props.data.map((day, i) => {
+    const days = this.state.daysData.map((day, i) => {
       const dayText = moment(day.time * 1000).format("MMM D");
-      let selected = false;
-      if (this.state.dayToDisplay === day.time) {
-        selected = true;
-      }
+
       return (
         <DayCard
+          id={i}
           key={i}
           day={dayText}
           icon={day.icon}
           temperatureHigh={day.temperatureHigh}
           temperatureLow={day.temperatureLow}
-          clicked={this.handleClickOnDay}
-          selected={selected}
+          dataForDay={this.state.daysData[i]}
           isDesktop={this.state.isDesktop}
+          clicked={this.handleClickOnDay}
         />
       );
     });
@@ -55,10 +61,19 @@ class DailyForcast extends Component {
         <div className="d-flex flex-column flex-md-row justify-content-around">
           {days}
         </div>
-        {this.state.isDesktop && <DayDetails />}
+        {this.state.isDesktop && (
+          <DayDetails
+            data={this.state.dayDetailToDisplay}
+            isDesktop={this.state.isDesktop}
+          />
+        )}
       </div>
     );
   }
 }
+
+DailyForcast.propTypes = {
+  data: PropTypes.array.isRequired
+};
 
 export default DailyForcast;
