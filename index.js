@@ -1,15 +1,16 @@
 const express = require("express");
 const app = express();
 const path = require("path");
-const buildPath = path.join(__dirname, "..", "build");
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 const bodyParser = require("body-parser");
 const pino = require("express-pino-logger")();
 const axios = require("axios");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(pino);
-app.use(express.static(buildPath));
+
+// ... other app.use middleware
+app.use(express.static(path.join(__dirname, "client", "build")));
 
 const getCircularReplacer = () => {
   const seen = new WeakSet();
@@ -71,8 +72,8 @@ app.get("/get/forecastdata", async (req, res) => {
 });
 
 // Serve up the index page no matter what
-app.get("/", (req, res) => {
-  res.sendFile(path.join(buildPath, "index.html"));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
 
 app.listen(port, () =>

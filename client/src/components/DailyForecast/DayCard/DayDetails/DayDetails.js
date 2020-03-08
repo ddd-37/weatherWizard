@@ -1,5 +1,5 @@
 import React from "react";
-import WindSpeedDiretion from "./../../../UI/WindSpeedDirection/WindSpeedDirection";
+import WindSpeedDiretion from "../../../UI/WindSpeedDirection/WindSpeedDirection";
 import moment from "moment";
 import PropTypes from "prop-types";
 

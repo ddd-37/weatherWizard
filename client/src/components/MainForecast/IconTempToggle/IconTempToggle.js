@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 import PropTypes from "prop-types";
 import WeatherIcon from "../../UI/WeatherIcon/WeatherIcon";
-import Temperature from "./../../UI/Temperature/Temperature";
+import Temperature from "../../UI/Temperature/Temperature";
 
 const IconTempToggle = ({ location, icon, temperature, summary, time }) => {
   return (

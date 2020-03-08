@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import WeatherIcon from "../../UI/WeatherIcon/WeatherIcon";
 import Temperature from "../../UI/Temperature/Temperature";
-import DayDetails from "./../DayCard/DayDetails/DayDetails";
+import DayDetails from "./DayDetails/DayDetails";
 import PropTypes from "prop-types";
 
 class DayCard extends Component {
