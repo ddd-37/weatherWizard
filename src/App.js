@@ -30,9 +30,7 @@ class App extends Component {
 
   locationSuccess = async position => {
     const { longitude, latitude } = position.coords;
-    const res = await axios.get(
-      `/forecastdata?latitude=${latitude}&longitude=${longitude}`
-    );
+    const res = await axios.get(`/forecastdatad`);
 
     const locationText = res.data.location;
     const weatherData = JSON.parse(res.data.forecastData).data;
