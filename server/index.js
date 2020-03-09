@@ -1,8 +1,13 @@
 const express = require("express");
 const app = express();
 const path = require("path");
+<<<<<<< HEAD
 const buildPath = path.join(__dirname, "build");
 const port = process.env.PORT || 5000;
+=======
+const buildPath = path.join(__dirname, "..", "build");
+const port = process.env.PORT || 3000;
+>>>>>>> 120a11a3807e466418204caf1378cb4da7368d82
 const bodyParser = require("body-parser");
 const pino = require("express-pino-logger")();
 const axios = require("axios");
