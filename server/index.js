@@ -1,8 +1,8 @@
 const express = require("express");
 const app = express();
 const path = require("path");
-const buildPath = path.join(__dirname, "..", "build");
-const port = process.env.PORT || 3000;
+const buildPath = path.join(__dirname, "build");
+const port = process.env.PORT || 5000;
 const bodyParser = require("body-parser");
 const pino = require("express-pino-logger")();
 const axios = require("axios");
@@ -24,7 +24,7 @@ const getCircularReplacer = () => {
   };
 };
 
-app.get("/get/forecastdata", async (req, res) => {
+app.get("/forecastdata", async (req, res) => {
   const { longitude, latitude } = req.query;
   try {
     const [cityName, weatherData] = await Promise.all([
@@ -76,5 +76,5 @@ app.get("/", (req, res) => {
 });
 
 app.listen(port, () =>
-  console.log("Express server is running on localhost:3001")
+  console.log("Express server is running on localhost:5000")
 );
