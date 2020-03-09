@@ -1,15 +1,16 @@
 const express = require("express");
-const app = express();
 const path = require("path");
-const buildPath = path.join(__dirname, "build");
-const port = process.env.PORT || 5000;
+const app = express();
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, "build")));
+
 const bodyParser = require("body-parser");
 const pino = require("express-pino-logger")();
 const axios = require("axios");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(pino);
-app.use(express.static(buildPath));
 
 const getCircularReplacer = () => {
   const seen = new WeakSet();
@@ -71,18 +72,9 @@ app.get("/forecastdata", async (req, res) => {
 });
 
 // Serve up the index page no matter what
-app.get("/", (req, res) => {
-  res.sendFile(path.join(buildPath, "index.html"));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/build/index.html"));
 });
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("build"));
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "build", "index.html"));
-  });
-}
-
-app.listen(port, () =>
-  console.log("Express server is running on localhost:5000")
-);
+const port = process.env.PORT || 5000;
+app.listen(port, () => console.log(`Express server is running on ${port}`));
