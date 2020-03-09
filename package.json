@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/ddd-37/weatherWizard#readme",
   "dependencies": {
+    "axios": "^0.19.2",
     "express": "^4.17.1",
     "express-pino-logger": "^4.0.0",
     "pino-colada": "^1.5.1"
