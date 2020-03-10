@@ -28,13 +28,15 @@ const getCircularReplacer = () => {
 app.get("/forecastdata", async (req, res) => {
   const { longitude, latitude } = req.query;
   try {
-    const [cityName, weatherData] = await Promise.all([
+    const [cityName, weatherData, moonData] = await Promise.all([
       axios.get(
         `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyCSRfDuPVjVUmKFmIEFs4oLJwwngrVylrk`
       ),
-      // TODO - this cors-anywhere.herokuapp.com seems hacky, need to find a more proper solution
       axios.get(
         `https://api.darksky.net/forecast/b2522f8b48049f38fd4bf5045e5c908f/${latitude},${longitude}`
+      ),
+      axios.get(
+        "https://api.ipgeolocation.io/astronomy?apiKey=bb5f22a9e9f64c4d842cc1ca876ea2a8&ip=1.1.1.1&lang=en"
       )
     ]);
     console.log("cityName", cityName.data);
@@ -57,10 +59,14 @@ app.get("/forecastdata", async (req, res) => {
         }
       }
     }
-    console.log(typeof weatherData);
+    console.log(moonData);
     let data = JSON.stringify(weatherData, getCircularReplacer());
     res.setHeader("Content-Type", "application/json");
-    res.send({ location: city + ", " + state, forecastData: data });
+    res.send({
+      location: city + ", " + state,
+      forecastData: data,
+      moonData: moonData
+    });
   } catch (err) {
     console.log(err);
   }

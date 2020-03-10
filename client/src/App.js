@@ -36,6 +36,8 @@ class App extends Component {
 
     const locationText = res.data.location;
     const weatherData = JSON.parse(res.data.forecastData).data;
+    const moonData = res.data.moonData;
+    console.log("App -> moonData", moonData);
 
     this.setState({
       loading: false,

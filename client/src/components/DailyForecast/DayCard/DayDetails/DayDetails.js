@@ -1,20 +1,24 @@
 import React from "react";
 import WindSpeedDiretion from "./../../../UI/WindSpeedDirection/WindSpeedDirection";
-import moment from "moment";
 import PropTypes from "prop-types";
+
+import sunriseImg from "./../../../../images/sunrise.png";
+import sunsetImg from "./../../../../images/sunset.png";
+import SunOrMoonTime from "./SunOrMoonTime/SunOrMoonTime";
 
 // Todo - need to fix the time, if I run through a VPN the time is always off,
 // For example I'm in MST but if I set my IP to florida the time is still returned as if I'm in Colorado
 const DayDetails = props => {
   console.log("DayDetails - props", props);
-  const {
+  let {
     time,
     windSpeed,
     windBearing,
     humidity,
     uvIndex,
     sunriseTime,
-    sunsetTime
+    sunsetTime,
+    summary
   } = props.data;
 
   if (!props.isDesktop) {
@@ -26,13 +30,46 @@ const DayDetails = props => {
         <span>Humidiity {humidity * 100}</span>
         <span>UV Index {uvIndex}</span>
         <span>
-          Sunrise/sunset {moment(sunriseTime * 1000).format("h:mma")}/
-          {moment(sunsetTime * 1000).format("h:mma")}
+          Sunrise/sunset {sunriseTime}/{sunsetTime}
         </span>
       </div>
     );
   } else {
-    return <div>Day Details{moment(time * 1000).format("dd")}</div>;
+    return (
+      <div className="mt-4">
+        <h3>Day Details</h3>
+        <div className="row my-3">
+          <div className="col-lg-3 col-md-4 col-sm-2">
+            <div className="p-2 border-top">
+              <h5 className="font-weight-bold">Summary</h5>
+              <h6 className="font-weight-light">{summary}</h6>
+            </div>
+          </div>
+          <div className="col-lg-3 col-md-4 col-sm-2">
+            <div className="p-1 border-top">
+              <SunOrMoonTime text={"Sunrise"} time={sunriseTime} />
+              <SunOrMoonTime text={"Sunset"} time={sunsetTime} />
+            </div>
+          </div>
+
+          <div className="col-lg-3 col-md-4 col-sm-2">
+            <div className="p-1 border-top">
+              <SunOrMoonTime text={"Moonrise"} time={sunriseTime} />
+              <SunOrMoonTime text={"Moonset"} time={sunsetTime} />
+            </div>
+          </div>
+          <div className="col-lg-3 col-md-4 col-sm-2">
+            <div className="p-1 border-top"></div>
+          </div>
+          <div className="col-lg-3 col-md-4 col-sm-2">
+            <div className="p-1 border-top"></div>
+          </div>
+          <div className="col-lg-3 col-md-4 col-sm-2">
+            <div className="p-1 border-top"></div>
+          </div>
+        </div>
+      </div>
+    );
   }
 };
 
