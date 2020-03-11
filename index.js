@@ -28,7 +28,7 @@ const getCircularReplacer = () => {
 app.get("/forecastdata", async (req, res) => {
   const { longitude, latitude } = req.query;
   try {
-    const [cityName, weatherData, moonData] = await Promise.all([
+    const [cityName, weatherData, celestialData] = await Promise.all([
       axios.get(
         `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyCSRfDuPVjVUmKFmIEFs4oLJwwngrVylrk`
       ),
@@ -36,7 +36,7 @@ app.get("/forecastdata", async (req, res) => {
         `https://api.darksky.net/forecast/b2522f8b48049f38fd4bf5045e5c908f/${latitude},${longitude}`
       ),
       axios.get(
-        "https://api.ipgeolocation.io/astronomy?apiKey=bb5f22a9e9f64c4d842cc1ca876ea2a8&ip=1.1.1.1&lang=en"
+        `https://api.ipgeolocation.io/astronomy?apiKey=bb5f22a9e9f64c4d842cc1ca876ea2a8&lat=${latitude}&long=${longitude}`
       )
     ]);
     console.log("cityName", cityName.data);
@@ -59,13 +59,14 @@ app.get("/forecastdata", async (req, res) => {
         }
       }
     }
-    console.log(moonData);
-    let data = JSON.stringify(weatherData, getCircularReplacer());
+
+    let weather = JSON.stringify(weatherData, getCircularReplacer());
+    let celestial = JSON.stringify(celestialData, getCircularReplacer());
     res.setHeader("Content-Type", "application/json");
     res.send({
       location: city + ", " + state,
-      forecastData: data,
-      moonData: moonData
+      forecastData: weather,
+      celestialData: celestial
     });
   } catch (err) {
     console.log(err);

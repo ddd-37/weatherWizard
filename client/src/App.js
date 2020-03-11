@@ -35,14 +35,16 @@ class App extends Component {
     );
 
     const locationText = res.data.location;
+    console.log("App -> locationText", locationText);
     const weatherData = JSON.parse(res.data.forecastData).data;
-    const moonData = res.data.moonData;
-    console.log("App -> moonData", moonData);
+    const celestialData = JSON.parse(res.data.celestialData).data;
+    console.log("App -> moonData", celestialData);
 
     this.setState({
       loading: false,
       locationText,
-      weatherData
+      weatherData,
+      celestialData
     });
   };
 
