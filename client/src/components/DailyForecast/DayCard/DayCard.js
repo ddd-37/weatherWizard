@@ -23,7 +23,8 @@ class DayCard extends Component {
       temperatureLow,
       clicked,
       isDesktop,
-      dataForDay
+      dataForDay,
+      positionCoords
     } = this.props;
     return (
       <div
@@ -44,7 +45,11 @@ class DayCard extends Component {
           {isDesktop || <span>{this.state.isVisible ? "-" : "+"}</span>}
         </div>
         {!isDesktop && this.state.isVisible && (
-          <DayDetails data={dataForDay} isDesktop={isDesktop} />
+          <DayDetails
+            data={dataForDay}
+            isDesktop={isDesktop}
+            positionCoords={positionCoords}
+          />
         )}
       </div>
     );

@@ -8,7 +8,6 @@ import moonriseIco from "./../../../../../images/moonrise.png";
 import moonsetIco from "./../../../../../images/moonset.png";
 
 const SunOrMoonTime = ({ text, time }) => {
-  const humanTime = (time = moment(time * 1000).format("h:mma"));
   let iconSrc;
   switch (text) {
     case "Sunrise":
@@ -29,14 +28,14 @@ const SunOrMoonTime = ({ text, time }) => {
       <h5>{text}</h5>
       <div className="d-flex align-items-center">
         <img src={iconSrc} alt={`${text} time`} />
-        <h5 className="ml-2 font-weight-light">{humanTime}</h5>
+        <h5 className="ml-2 font-weight-light">{time}</h5>
       </div>
     </div>
   );
 };
 
 SunOrMoonTime.propTypes = {
-  isSun: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
   time: PropTypes.number.isRequired
 };
 export default SunOrMoonTime;

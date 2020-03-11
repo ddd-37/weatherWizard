@@ -25,10 +25,6 @@ class DailyForcast extends Component {
 
   findVewPortSize = () => {
     const currentWindow = window.innerWidth > 768;
-    console.log(
-      "DailyForcast -> findVewPortSize -> currentWindow",
-      currentWindow
-    );
 
     if (currentWindow !== this.state.isDesktop) {
       this.setState({
@@ -40,7 +36,6 @@ class DailyForcast extends Component {
   render() {
     const days = this.state.daysData.map((day, i) => {
       const dayText = moment(day.time * 1000).format("MMM D");
-
       return (
         <DayCard
           id={i}
@@ -52,6 +47,7 @@ class DailyForcast extends Component {
           dataForDay={this.state.daysData[i]}
           isDesktop={this.state.isDesktop}
           clicked={this.handleClickOnDay}
+          positionCoords={this.props.positionCoords}
         />
       );
     });
@@ -64,6 +60,7 @@ class DailyForcast extends Component {
         {this.state.isDesktop && (
           <DayDetails
             data={this.state.dayDetailToDisplay}
+            positionCoords={this.props.positionCoords}
             isDesktop={this.state.isDesktop}
           />
         )}

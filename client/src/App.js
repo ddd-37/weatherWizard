@@ -10,6 +10,7 @@ class App extends Component {
     loading: true,
     locationText: null,
     weatherData: null,
+    positionCoords: null,
     error: null // TODO - Set up error handling
   };
 
@@ -30,6 +31,7 @@ class App extends Component {
 
   locationSuccess = async position => {
     const { longitude, latitude } = position.coords;
+    console.log("App -> longitude", longitude);
     const res = await axios.get(
       `/forecastdata?latitude=${latitude}&longitude=${longitude}`
     );
@@ -40,7 +42,11 @@ class App extends Component {
     this.setState({
       loading: false,
       locationText,
-      weatherData
+      weatherData,
+      positionCoords: {
+        lat: latitude.toFixed(2),
+        lng: longitude.toFixed(2)
+      }
     });
   };
 
@@ -67,13 +73,17 @@ class App extends Component {
     }
 
     if (this.state.weatherData) {
+      console.log(this.state);
       return (
         <div className="App container-md p-2">
           <MainForecast
             location={this.state.locationText}
             weatherData={this.state.weatherData.currently}
           />
-          <DailyForcast data={this.state.weatherData.daily.data} />
+          <DailyForcast
+            data={this.state.weatherData.daily.data}
+            positionCoords={this.state.positionCoords}
+          />
         </div>
       );
     }

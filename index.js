@@ -25,6 +25,23 @@ const getCircularReplacer = () => {
   };
 };
 
+app.get("/celestialdata", async (req, res) => {
+  const { lat, lng } = req.query;
+  try {
+    const data = await axios.get(
+      `https://api.ipgeolocation.io/astronomy?apiKey=bb5f22a9e9f64c4d842cc1ca876ea2a8&lat=${lat}&long=${lng}`
+    );
+
+    let celestial = JSON.stringify(data, getCircularReplacer());
+    res.setHeader("Content-Type", "application/json");
+    res.send({
+      celestialData: celestial
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 app.get("/forecastdata", async (req, res) => {
   const { longitude, latitude } = req.query;
   try {
@@ -34,12 +51,8 @@ app.get("/forecastdata", async (req, res) => {
       ),
       axios.get(
         `https://api.darksky.net/forecast/b2522f8b48049f38fd4bf5045e5c908f/${latitude},${longitude}`
-      ),
-      axios.get(
-        `https://api.ipgeolocation.io/astronomy?apiKey=bb5f22a9e9f64c4d842cc1ca876ea2a8&lat=${latitude}&long=${longitude}`
       )
     ]);
-    console.log("cityName", cityName.data);
     let city, state;
     const results = cityName.data.results;
     // The data returned from Google isn't formatted how we want it, we need to find just the types that match 'locality' {city} and 'administrative_area_level_1' {state} so we get something like Denver, CO
@@ -61,12 +74,11 @@ app.get("/forecastdata", async (req, res) => {
     }
 
     let weather = JSON.stringify(weatherData, getCircularReplacer());
-    let celestial = JSON.stringify(celestialData, getCircularReplacer());
+
     res.setHeader("Content-Type", "application/json");
     res.send({
       location: city + ", " + state,
-      forecastData: weather,
-      celestialData: celestial
+      forecastData: weather
     });
   } catch (err) {
     console.log(err);
