@@ -2,8 +2,6 @@ import React from "react";
 import WindSpeedDiretion from "./../../../UI/WindSpeedDirection/WindSpeedDirection";
 import PropTypes from "prop-types";
 
-import sunriseImg from "./../../../../images/sunrise.png";
-import sunsetImg from "./../../../../images/sunset.png";
 import SunOrMoonTime from "./SunOrMoonTime/SunOrMoonTime";
 
 // Todo - need to fix the time, if I run through a VPN the time is always off,
