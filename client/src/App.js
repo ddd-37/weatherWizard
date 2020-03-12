@@ -15,7 +15,6 @@ class App extends Component {
   };
 
   componentDidMount() {
-    console.log("App -> componentDidMount -> componentDidMount");
     // Get the lat and long
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -31,7 +30,6 @@ class App extends Component {
 
   locationSuccess = async position => {
     const { longitude, latitude } = position.coords;
-    console.log("App -> longitude", longitude);
     const res = await axios.get(
       `/forecastdata?latitude=${latitude}&longitude=${longitude}`
     );
@@ -73,7 +71,6 @@ class App extends Component {
     }
 
     if (this.state.weatherData) {
-      console.log(this.state);
       return (
         <div className="App container-md p-2">
           <MainForecast

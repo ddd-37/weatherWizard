@@ -17,7 +17,6 @@ class DailyForcast extends Component {
   }
 
   handleClickOnDay = e => {
-    console.log(e.currentTarget);
     this.setState({
       dayDetailToDisplay: this.props.data[e.currentTarget.id]
     });

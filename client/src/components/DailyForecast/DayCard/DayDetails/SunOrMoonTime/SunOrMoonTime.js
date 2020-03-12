@@ -1,6 +1,7 @@
 import React from "react";
-import moment from "moment";
 import PropTypes from "prop-types";
+
+import HourMinTime from "../../../../UI/Time/HourMinTime/HourMinTime";
 
 import sunriseIco from "./../../../../../images/sunrise.png";
 import sunsetIco from "./../../../../../images/sunset.png";
@@ -28,7 +29,9 @@ const SunOrMoonTime = ({ text, time }) => {
       <h5>{text}</h5>
       <div className="d-flex align-items-center">
         <img src={iconSrc} alt={`${text} time`} />
-        <h5 className="ml-2 font-weight-light">{time}</h5>
+        <h5 className="ml-2 font-weight-light">
+          <HourMinTime time={time} />
+        </h5>
       </div>
     </div>
   );
