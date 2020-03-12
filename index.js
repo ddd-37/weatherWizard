@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const app = express();
 const bodyParser = require("body-parser");
+const moment = require("moment");
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, "client/build")));
@@ -27,6 +28,7 @@ const getCircularReplacer = () => {
 
 app.get("/celestialdata", async (req, res) => {
   const { lat, lng } = req.query;
+
   try {
     const data = await axios.get(
       `https://api.ipgeolocation.io/astronomy?apiKey=bb5f22a9e9f64c4d842cc1ca876ea2a8&lat=${lat}&long=${lng}`
@@ -44,15 +46,32 @@ app.get("/celestialdata", async (req, res) => {
 
 app.get("/forecastdata", async (req, res) => {
   const { longitude, latitude } = req.query;
+
   try {
-    const [cityName, weatherData, celestialData] = await Promise.all([
+    // We need 8 days worth of data to display for celestial data.  Darksyk doesn't give us everything we need to we need to head to ipgeolocation to get the missing bits
+    // ipgeolocation requires a YYY-MM-DD format to their dates so let's set that up as an array
+    const dates = [];
+    for (var i = 0; i <= 8; i++) {
+      dates.push(
+        moment()
+          .add(i, "days")
+          .format("YYYY-MM-DD")
+      );
+    }
+    const [cityName, weatherData, ...celestialData] = await Promise.all([
       axios.get(
         `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyCSRfDuPVjVUmKFmIEFs4oLJwwngrVylrk`
       ),
       axios.get(
         `https://api.darksky.net/forecast/b2522f8b48049f38fd4bf5045e5c908f/${latitude},${longitude}`
-      )
+      ),
+      ...dates.map(date => {
+        return axios.get(
+          `https://api.ipgeolocation.io/astronomy?apiKey=bb5f22a9e9f64c4d842cc1ca876ea2a8&lat=${latitude}&long=${longitude}&date=${date}`
+        );
+      })
     ]);
+    console.log("celestialData", celestialData);
     let city, state;
     const results = cityName.data.results;
     // The data returned from Google isn't formatted how we want it, we need to find just the types that match 'locality' {city} and 'administrative_area_level_1' {state} so we get something like Denver, CO
@@ -74,11 +93,13 @@ app.get("/forecastdata", async (req, res) => {
     }
 
     let weather = JSON.stringify(weatherData, getCircularReplacer());
+    let celestial = JSON.stringify(celestialData, getCircularReplacer());
 
     res.setHeader("Content-Type", "application/json");
     res.send({
       location: city + ", " + state,
-      forecastData: weather
+      forecastData: weather,
+      sunMoonData: celestial
     });
   } catch (err) {
     console.log(err);

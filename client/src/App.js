@@ -33,18 +33,18 @@ class App extends Component {
     const res = await axios.get(
       `/forecastdata?latitude=${latitude}&longitude=${longitude}`
     );
+    console.log("App -> res", res);
 
     const locationText = res.data.location;
     const weatherData = JSON.parse(res.data.forecastData).data;
+    const celestialData = JSON.parse(res.data.sunMoonData);
+    console.log("App -> celestialData", celestialData);
 
     this.setState({
       loading: false,
       locationText,
       weatherData,
-      positionCoords: {
-        lat: latitude.toFixed(2),
-        lng: longitude.toFixed(2)
-      }
+      celestialData
     });
   };
 
@@ -71,6 +71,7 @@ class App extends Component {
     }
 
     if (this.state.weatherData) {
+      console.log(this.state);
       return (
         <div className="App container-md p-2">
           <MainForecast
