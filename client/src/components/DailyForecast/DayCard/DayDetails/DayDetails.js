@@ -16,10 +16,11 @@ const DayDetails = props => {
     uvIndex,
     sunriseTime,
     sunsetTime,
-
+    moonrise,
+    moonset,
     summary
   } = props.data;
-  console.log("sunsetTime", sunsetTime);
+
   if (!props.isDesktop) {
     return (
       <div>
@@ -54,8 +55,8 @@ const DayDetails = props => {
 
           <div className="col-lg-3 col-md-4 col-sm-2">
             <div className="p-1 border-top">
-              <SunOrMoonTime text={"Moonrise"} time={2} />
-              <SunOrMoonTime text={"Moonset"} time={2} />
+              <SunOrMoonTime text={"Moonrise"} time={moonrise} />
+              <SunOrMoonTime text={"Moonset"} time={moonset} />
             </div>
           </div>
           <div className="col-lg-3 col-md-4 col-sm-2">

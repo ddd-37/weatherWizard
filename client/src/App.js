@@ -33,12 +33,22 @@ class App extends Component {
     const res = await axios.get(
       `/forecastdata?latitude=${latitude}&longitude=${longitude}`
     );
-    console.log("App -> res", res);
 
     const locationText = res.data.location;
-    const weatherData = JSON.parse(res.data.forecastData).data;
-    const celestialData = JSON.parse(res.data.sunMoonData);
-    console.log("App -> celestialData", celestialData);
+    let weatherData = JSON.parse(res.data.forecastData).data;
+
+    const celestialData = JSON.parse(res.data.sunMoonData).map(item => {
+      return item.data;
+    });
+
+    // The sun and moon rise times come from our celestialData, need to append that to our weatherData obj here
+    weatherData.daily.data.forEach((item, i) => {
+      item.sunrise = celestialData[i].sunrise;
+      item.sunset = celestialData[i].sunset;
+      item.day_length = celestialData[i].day_length;
+      item.moonrise = celestialData[i].moonrise;
+      item.moonset = celestialData[i].moonset;
+    });
 
     this.setState({
       loading: false,
@@ -79,8 +89,9 @@ class App extends Component {
             weatherData={this.state.weatherData.currently}
           />
           <DailyForcast
-            data={this.state.weatherData.daily.data}
+            weatherData={this.state.weatherData.daily.data}
             positionCoords={this.state.positionCoords}
+            celestialData={this.state.celestialData}
           />
         </div>
       );

@@ -51,7 +51,7 @@ app.get("/forecastdata", async (req, res) => {
     // We need 8 days worth of data to display for celestial data.  Darksyk doesn't give us everything we need to we need to head to ipgeolocation to get the missing bits
     // ipgeolocation requires a YYY-MM-DD format to their dates so let's set that up as an array
     const dates = [];
-    for (var i = 0; i <= 8; i++) {
+    for (var i = 0; i <= 7; i++) {
       dates.push(
         moment()
           .add(i, "days")
@@ -71,7 +71,6 @@ app.get("/forecastdata", async (req, res) => {
         );
       })
     ]);
-    console.log("celestialData", celestialData);
     let city, state;
     const results = cityName.data.results;
     // The data returned from Google isn't formatted how we want it, we need to find just the types that match 'locality' {city} and 'administrative_area_level_1' {state} so we get something like Denver, CO
@@ -93,6 +92,7 @@ app.get("/forecastdata", async (req, res) => {
     }
 
     let weather = JSON.stringify(weatherData, getCircularReplacer());
+    // TODO - we've got a bunch of extra data, need to wittle it down a bit
     let celestial = JSON.stringify(celestialData, getCircularReplacer());
 
     res.setHeader("Content-Type", "application/json");
