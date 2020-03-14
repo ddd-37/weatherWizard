@@ -57,6 +57,7 @@ const DayDetails = props => {
             <div className="p-1 border-top">
               <SunOrMoonTime text={"Moonrise"} time={moonrise} />
               <SunOrMoonTime text={"Moonset"} time={moonset} />
+              <h5 className="ml-2 font-weight-light">Moon Phase</h5>
             </div>
           </div>
           <div className="col-lg-3 col-md-4 col-sm-2">

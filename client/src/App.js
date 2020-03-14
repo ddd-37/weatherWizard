@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import moment from "moment";
 
 import "./App.css";
 import MainForecast from "./components/MainForecast/MainForecast";
@@ -30,18 +31,35 @@ class App extends Component {
 
   locationSuccess = async position => {
     const { longitude, latitude } = position.coords;
-    const res = await axios.get(
+
+    // Get all forcast data
+    const forecastData = await axios.get(
       `/forecastdata?latitude=${latitude}&longitude=${longitude}`
     );
 
-    const locationText = res.data.location;
-    let weatherData = JSON.parse(res.data.forecastData).data;
+    const locationText = forecastData.data.location;
 
-    const celestialData = JSON.parse(res.data.sunMoonData).map(item => {
-      return item.data;
-    });
+    // The API limit for the celestial data is a bit low, so let's cache this info in localstorage, and only update it once every 24 hours
+    const currentTime = new Date().getTime();
+    const lastUpdate = localStorage.getItem("lastCelestialUpdate");
+
+    if (currentTime - lastUpdate > 1000 * 60 * 60 * 24) {
+      localStorage.setItem("lastCelestialUpdate", currentTime);
+      const celestialResponse = await axios.get(
+        `/celestialdata?latitude=${latitude}&longitude=${longitude}`
+      );
+
+      const celestialObj = JSON.parse(celestialResponse.data.data).map(date => {
+        return date.data;
+      });
+
+      localStorage.setItem("celestialdata", JSON.stringify(celestialObj));
+    }
+
+    const celestialData = JSON.parse(localStorage.getItem("celestialdata"));
 
     // The sun and moon rise times come from our celestialData, need to append that to our weatherData obj here
+    let weatherData = JSON.parse(forecastData.data.forecastData).data;
     weatherData.daily.data.forEach((item, i) => {
       item.sunrise = celestialData[i].sunrise;
       item.sunset = celestialData[i].sunset;
@@ -53,8 +71,8 @@ class App extends Component {
     this.setState({
       loading: false,
       locationText,
-      weatherData,
-      celestialData
+      weatherData
+      //celestialData
     });
   };
 

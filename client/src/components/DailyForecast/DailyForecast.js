@@ -69,7 +69,7 @@ class DailyForcast extends Component {
 }
 
 DailyForcast.propTypes = {
-  data: PropTypes.array.isRequired
+  weatherData: PropTypes.array.isRequired
 };
 
 export default DailyForcast;

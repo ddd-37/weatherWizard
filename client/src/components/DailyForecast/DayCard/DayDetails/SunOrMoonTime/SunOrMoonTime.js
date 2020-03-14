@@ -39,6 +39,6 @@ const SunOrMoonTime = ({ text, time }) => {
 
 SunOrMoonTime.propTypes = {
   text: PropTypes.string.isRequired,
-  time: PropTypes.number.isRequired
+  time: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 };
 export default SunOrMoonTime;
