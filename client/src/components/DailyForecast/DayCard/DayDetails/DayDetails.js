@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 
 import SunOrMoonTime from "./SunOrMoonTime/SunOrMoonTime";
 import HourMinTime from "../../../UI/Time/HourMinTime/HourMinTime";
+import MoonPhase from "../../../UI/MoonPhase/MoonPhase";
 
 // Todo - need to fix the time, if I run through a VPN the time is always off,
 // For example I'm in MST but if I set my IP to florida the time is still returned as if I'm in Colorado
@@ -18,6 +19,7 @@ const DayDetails = props => {
     sunsetTime,
     moonrise,
     moonset,
+    moonPhase,
     summary
   } = props.data;
 
@@ -57,7 +59,8 @@ const DayDetails = props => {
             <div className="p-1 border-top">
               <SunOrMoonTime text={"Moonrise"} time={moonrise} />
               <SunOrMoonTime text={"Moonset"} time={moonset} />
-              <h5 className="ml-2 font-weight-light">Moon Phase</h5>
+              <h5 className="m-0">Moon Phase</h5>
+              <MoonPhase phase={moonPhase} />
             </div>
           </div>
           <div className="col-lg-3 col-md-4 col-sm-2">
