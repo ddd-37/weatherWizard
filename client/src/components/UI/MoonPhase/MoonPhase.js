@@ -11,43 +11,36 @@ import ThirdQuarter from "./../../../images/Third Quarter.png";
 import WanCrescent from "./../../../images/Waning Crescent.png";
 
 const MoonPhase = ({ phase }) => {
-  // Take the moon phase as a percentage, and find which phase we're in
-  let roundedPhase = Math.floor((100 * phase) / 12.5);
+  console.log("MoonPhase -> phase", phase);
+  console.log("MoonPhase -> phase", 0.52 < phase);
   let text, src;
 
-  switch (roundedPhase) {
-    case 0:
-      text = "New Moon";
-      src = NewMoon;
-      break;
-    case 1:
-      text = "Waxing Crescent Moon";
-      src = WaxCrecent;
-      break;
-    case 2:
-      text = "Quarter Moon";
-      src = FirstQuarter;
-      break;
-    case 3:
-      text = "Waxing Gibbous";
-      src = WaxGibbous;
-      break;
-    case 4:
-      text = "Full Moon";
-      src = FullMoon;
-      break;
-    case 5:
-      text = "Waning Gibbous";
-      src = WanGibbous;
-      break;
-    case 6:
-      text = "Last Quarter";
-      src = ThirdQuarter;
-    case 7:
-      text = "Waning Crescent";
-      src = WanCrescent;
-      break;
+  if (phase < 0.2) {
+    text = "New Moon";
+    src = NewMoon;
+  } else if (phase < 0.25) {
+    text = "Waxing Crescent Moon";
+    src = WaxCrecent;
+  } else if (phase < 0.28) {
+    text = "Quarter Moon";
+    src = FirstQuarter;
+  } else if (phase < 0.5) {
+    text = "Waxing Gibbous";
+    src = WaxGibbous;
+  } else if (phase < 0.52) {
+    text = "Full Moon";
+    src = FullMoon;
+  } else if (phase < 0.75) {
+    text = "Waning Gibbous";
+    src = WanGibbous;
+  } else if (phase < 0.78) {
+    text = "Last Quarter";
+    src = ThirdQuarter;
+  } else if (phase < 1) {
+    text = "Waning Crescent";
+    src = WanCrescent;
   }
+
   return (
     <>
       <h6 className="d-inline mr-1 font-weight-light">{text}</h6>
