@@ -5,10 +5,12 @@ import PropTypes from "prop-types";
 import SunOrMoonTime from "./SunOrMoonTime/SunOrMoonTime";
 import HourMinTime from "../../../UI/Time/HourMinTime/HourMinTime";
 import MoonPhase from "../../../UI/MoonPhase/MoonPhase";
+import DoughnutChart from "../../../UI/DoughutChart/DoughnutChart";
 
 // Todo - need to fix the time, if I run through a VPN the time is always off,
 // For example I'm in MST but if I set my IP to florida the time is still returned as if I'm in Colorado
 const DayDetails = props => {
+  console.log("props", props);
   let {
     time,
     windSpeed,
@@ -20,7 +22,8 @@ const DayDetails = props => {
     moonrise,
     moonset,
     moonPhase,
-    summary
+    summary,
+    precipProbability
   } = props.data;
 
   if (!props.isDesktop) {
@@ -64,7 +67,32 @@ const DayDetails = props => {
             </div>
           </div>
           <div className="col-lg-3 col-md-4 col-sm-2">
-            <div className="p-1 border-top"></div>
+            <div className="border-top">
+              <div className="row container d-flex justify-content-between">
+                <div>
+                  <h6>Precipitation</h6>
+                  <DoughnutChart
+                    arrData={[precipProbability, 1 - precipProbability]}
+                  />
+                </div>
+                <div>
+                  <h6>Humidity</h6>
+                  <DoughnutChart arrData={[humidity, 1 - humidity]} />
+                </div>
+              </div>
+              <div className="row container d-flex justify-content-between">
+                <div>
+                  <h6>UV Index</h6>
+                  <DoughnutChart
+                    arrData={[precipProbability, 1 - precipProbability]}
+                  />
+                </div>
+                <div>
+                  <h6>Max Wind</h6>
+                  <DoughnutChart arrData={[humidity, 1 - humidity]} />
+                </div>
+              </div>
+            </div>
           </div>
           <div className="col-lg-3 col-md-4 col-sm-2">
             <div className="p-1 border-top"></div>
