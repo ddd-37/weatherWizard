@@ -25,6 +25,7 @@ const DayDetails = props => {
     summary,
     precipProbability
   } = props.data;
+  console.log("props.data", props.data);
 
   if (!props.isDesktop) {
     return (
@@ -63,30 +64,26 @@ const DayDetails = props => {
               <MoonPhase phase={moonPhase} />
             </div>
           </div>
-          <div className="col-lg-4 col-md-6">
+          <div className="col-lg-6 col-md-6">
             <div className="border-top">
               <div className="row container d-flex flex-row justify-content-between">
                 <div>
                   <h6>Precipitation</h6>
                   <DoughnutChart
                     arrData={[precipProbability, 1 - precipProbability]}
+                    isPercentage={true}
                   />
                 </div>
                 <div>
                   <h6>Humidity</h6>
-                  <DoughnutChart arrData={[humidity, 1 - humidity]} />
-                </div>
-              </div>
-              <div className="row container d-flex justify-content-between">
-                <div>
-                  <h6>UV Index</h6>
                   <DoughnutChart
-                    arrData={[precipProbability, 1 - precipProbability]}
+                    arrData={[humidity, 1 - humidity]}
+                    isPercentage={true}
                   />
                 </div>
                 <div>
-                  <h6>Max Wind</h6>
-                  <DoughnutChart arrData={[humidity, 1 - humidity]} />
+                  <h6>UV Index</h6>
+                  <DoughnutChart arrData={[uvIndex, 10 - uvIndex]} />
                 </div>
               </div>
             </div>

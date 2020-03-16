@@ -26,6 +26,7 @@ class DayCard extends Component {
       dataForDay,
       positionCoords
     } = this.props;
+
     return (
       <div
         className="border border-light m-1 p-2"
