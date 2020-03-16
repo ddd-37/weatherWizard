@@ -43,22 +43,19 @@ const DayDetails = props => {
   } else {
     return (
       <div className="mt-4">
-        <h3>Day Details</h3>
-        <div className="row my-3">
-          <div className="col-lg-3 col-md-4 col-sm-2">
-            <div className="p-2 border-top">
-              <h5 className="font-weight-bold">Summary</h5>
-              <h6 className="font-weight-light">{summary}</h6>
-            </div>
-          </div>
-          <div className="col-lg-3 col-md-4 col-sm-2">
+        <div className="d-flex align-items-center">
+          <h3 className="mr-2">Day Details </h3>
+          <h5 className="font-weight-light">- {summary}</h5>
+        </div>
+        <div className="row d-flex justify-content-center my-3 p-3">
+          <div className="col-lg-3 col-md-3">
             <div className="p-1 border-top">
               <SunOrMoonTime text={"Sunrise"} time={sunriseTime} />
               <SunOrMoonTime text={"Sunset"} time={sunsetTime} />
             </div>
           </div>
 
-          <div className="col-lg-3 col-md-4 col-sm-2">
+          <div className="col-lg-3 col-md-3">
             <div className="p-1 border-top">
               <SunOrMoonTime text={"Moonrise"} time={moonrise} />
               <SunOrMoonTime text={"Moonset"} time={moonset} />
@@ -66,9 +63,9 @@ const DayDetails = props => {
               <MoonPhase phase={moonPhase} />
             </div>
           </div>
-          <div className="col-lg-3 col-md-4 col-sm-2">
+          <div className="col-lg-4 col-md-6">
             <div className="border-top">
-              <div className="row container d-flex justify-content-between">
+              <div className="row container d-flex flex-row justify-content-between">
                 <div>
                   <h6>Precipitation</h6>
                   <DoughnutChart
@@ -93,12 +90,6 @@ const DayDetails = props => {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="col-lg-3 col-md-4 col-sm-2">
-            <div className="p-1 border-top"></div>
-          </div>
-          <div className="col-lg-3 col-md-4 col-sm-2">
-            <div className="p-1 border-top"></div>
           </div>
         </div>
       </div>

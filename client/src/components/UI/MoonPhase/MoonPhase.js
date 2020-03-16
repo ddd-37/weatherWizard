@@ -11,8 +11,6 @@ import ThirdQuarter from "./../../../images/Third Quarter.png";
 import WanCrescent from "./../../../images/Waning Crescent.png";
 
 const MoonPhase = ({ phase }) => {
-  console.log("MoonPhase -> phase", phase);
-  console.log("MoonPhase -> phase", 0.52 < phase);
   let text, src;
 
   if (phase < 0.2) {

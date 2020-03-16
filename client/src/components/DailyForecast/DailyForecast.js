@@ -23,7 +23,7 @@ class DailyForcast extends Component {
   };
 
   findVewPortSize = () => {
-    const currentWindow = window.innerWidth > 768;
+    const currentWindow = window.innerWidth > 800;
 
     if (currentWindow !== this.state.isDesktop) {
       this.setState({
