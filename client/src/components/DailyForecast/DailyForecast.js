@@ -33,7 +33,7 @@ class DailyForcast extends Component {
   };
 
   render() {
-    const days = this.state.weatherData.map((day, i) => {
+    const dayCards = this.state.weatherData.map((day, i) => {
       const dayText = moment(day.time * 1000).format("MMM D");
       return (
         <DayCard
@@ -51,10 +51,10 @@ class DailyForcast extends Component {
       );
     });
     return (
-      <div className="container">
+      <div className="container-md">
         <h2>Daily Forcast</h2>
         <div className="d-flex flex-column flex-md-row justify-content-around">
-          {days}
+          {dayCards}
         </div>
         {this.state.isDesktop && (
           <DayDetails

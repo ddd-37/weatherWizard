@@ -101,7 +101,7 @@ class App extends Component {
     if (this.state.weatherData) {
       console.log(this.state);
       return (
-        <div className="App container-md p-2">
+        <div className="App container-fluid p-2">
           <MainForecast
             location={this.state.locationText}
             weatherData={this.state.weatherData.currently}
