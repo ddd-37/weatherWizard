@@ -23,6 +23,8 @@ const SunOrMoonTime = ({ text, time }) => {
     case "Moonset":
       iconSrc = moonsetIco;
       break;
+    default:
+      break;
   }
   return (
     <div className="mb-2">

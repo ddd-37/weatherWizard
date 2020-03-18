@@ -42,7 +42,7 @@ const MoonPhase = ({ phase }) => {
   return (
     <>
       <h6 className="d-inline mr-1 font-weight-light">{text}</h6>
-      <img src={src} />
+      <img src={src} alt="Moon Phase" />
     </>
   );
 };

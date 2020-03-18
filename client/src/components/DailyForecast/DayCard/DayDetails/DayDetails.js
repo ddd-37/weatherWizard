@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import WindSpeedDiretion from "./../../../UI/WindSpeedDirection/WindSpeedDirection";
 import PropTypes from "prop-types";
 
@@ -10,7 +10,6 @@ import DoughnutChart from "../../../UI/DoughutChart/DoughnutChart";
 // Todo - need to fix the time, if I run through a VPN the time is always off,
 // For example I'm in MST but if I set my IP to florida the time is still returned as if I'm in Colorado
 const DayDetails = props => {
-  console.log("props", props);
   const {
     windSpeed,
     windBearing,
@@ -24,7 +23,6 @@ const DayDetails = props => {
     summary,
     precipProbability
   } = props.data;
-  console.log(" props.data", props.data);
 
   if (!props.isDesktop) {
     return (

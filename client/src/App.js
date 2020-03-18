@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-import moment from "moment";
 
 import "./App.css";
 import MainForecast from "./components/MainForecast/MainForecast";
@@ -99,7 +98,6 @@ class App extends Component {
     }
 
     if (this.state.weatherData) {
-      console.log(this.state);
       return (
         <div className="App container-fluid p-2">
           <MainForecast
