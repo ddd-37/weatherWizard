@@ -15,7 +15,7 @@ class App extends Component {
   };
 
   componentDidMount() {
-    // Get the lat and long
+    //Get the lat and long
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         this.locationSuccess,
@@ -85,7 +85,7 @@ class App extends Component {
   render() {
     if (this.state.loading) {
       return (
-        <div className="App">
+        <div className="App d-flex justify-content-center align-items-center">
           <div className="spinner-border text-success" role="status">
             <span className="sr-only">Loading...</span>
           </div>
