@@ -23,8 +23,7 @@ class DayCard extends Component {
       temperatureLow,
       clicked,
       isDesktop,
-      dataForDay,
-      positionCoords
+      dataForDay
     } = this.props;
 
     const classes = isDesktop ? "border " : "border-bottom";
@@ -50,7 +49,6 @@ class DayCard extends Component {
           <DayDetails
             data={dataForDay}
             isDesktop={isDesktop}
-            positionCoords={positionCoords}
             isVisible={this.state.isVisible}
           />
         )}

@@ -46,7 +46,6 @@ class DailyForcast extends Component {
           dataForDay={this.state.weatherData[i]}
           isDesktop={this.state.isDesktop}
           clicked={this.handleClickOnDay}
-          positionCoords={this.props.positionCoords}
         />
       );
     });
@@ -59,7 +58,6 @@ class DailyForcast extends Component {
         {this.state.isDesktop && (
           <DayDetails
             data={this.state.displayData}
-            positionCoords={this.props.positionCoords}
             isDesktop={this.state.isDesktop}
           />
         )}
