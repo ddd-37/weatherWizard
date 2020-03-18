@@ -11,8 +11,7 @@ import DoughnutChart from "../../../UI/DoughutChart/DoughnutChart";
 // For example I'm in MST but if I set my IP to florida the time is still returned as if I'm in Colorado
 const DayDetails = props => {
   console.log("props", props);
-  let {
-    time,
+  const {
     windSpeed,
     windBearing,
     humidity,
@@ -25,20 +24,31 @@ const DayDetails = props => {
     summary,
     precipProbability
   } = props.data;
-  console.log("props.data", props.data);
+  console.log(" props.data", props.data);
 
   if (!props.isDesktop) {
     return (
       <div>
-        <span>
-          Wind <WindSpeedDiretion speed={windSpeed} bearing={windBearing} />
-        </span>
-        <span>Humidiity {humidity * 100}</span>
-        <span>UV Index {uvIndex}</span>
-        <span>
-          Sunrise/sunset <HourMinTime time={sunriseTime} />/{" "}
-          <HourMinTime time={sunsetTime} />
-        </span>
+        <h6>{summary}</h6>
+        <div className="d-flex flex-row">
+          <div className="d-flex flex-column">
+            <h6>Wind:</h6>
+            <h6>Humidiity:</h6>
+            <h6>UV Index:</h6>
+            <h6>Sunrise/sunset:</h6>
+          </div>
+          <div className="d-flex flex-column ml-5">
+            <h6>
+              <WindSpeedDiretion speed={windSpeed} bearing={windBearing} />
+            </h6>
+            <h6> {Math.floor(humidity * 100) + "%"}</h6>
+            <h6> {uvIndex}</h6>
+            <h6>
+              <HourMinTime time={sunriseTime} />/{" "}
+              <HourMinTime time={sunsetTime} />
+            </h6>
+          </div>
+        </div>
       </div>
     );
   } else {

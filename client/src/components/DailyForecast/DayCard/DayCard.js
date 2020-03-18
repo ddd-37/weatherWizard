@@ -27,9 +27,10 @@ class DayCard extends Component {
       positionCoords
     } = this.props;
 
+    const classes = isDesktop ? "border " : "border-bottom";
     return (
       <div
-        className="border border-light m-1 p-2"
+        className={`${classes} border-light m-1 p-2`}
         id={id}
         onClick={isDesktop ? clicked : this.handleClick}
       >
@@ -50,6 +51,7 @@ class DayCard extends Component {
             data={dataForDay}
             isDesktop={isDesktop}
             positionCoords={positionCoords}
+            isVisible={this.state.isVisible}
           />
         )}
       </div>
