@@ -8,6 +8,7 @@ class DailyForcast extends Component {
   state = {
     weatherData: this.props.weatherData,
     displayData: this.props.weatherData[0],
+    selectedDayId: 0,
     isDesktop: false
   };
 
@@ -17,8 +18,11 @@ class DailyForcast extends Component {
   }
 
   handleClickOnDay = e => {
+    const selectedDayId = parseInt(e.currentTarget.id);
+    console.log("DailyForcast -> selectedDayId", selectedDayId);
     this.setState({
-      displayData: this.props.weatherData[e.currentTarget.id]
+      displayData: this.props.weatherData[selectedDayId],
+      selectedDayId
     });
   };
 
@@ -35,6 +39,7 @@ class DailyForcast extends Component {
   render() {
     const dayCards = this.state.weatherData.map((day, i) => {
       const dayText = moment(day.time * 1000).format("MMM D");
+      const isSelected = i === this.state.selectedDayId;
       return (
         <DayCard
           id={i}
@@ -45,6 +50,7 @@ class DailyForcast extends Component {
           temperatureLow={day.temperatureLow}
           dataForDay={this.state.weatherData[i]}
           isDesktop={this.state.isDesktop}
+          isSelected={isSelected}
           clicked={this.handleClickOnDay}
         />
       );

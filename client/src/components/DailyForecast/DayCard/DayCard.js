@@ -9,6 +9,7 @@ class DayCard extends Component {
     isVisible: false
   };
 
+  // Will only fire when not on a desktop, used to expand the row to show the day card's data
   handleClick = e => {
     const toggle = !this.state.isVisible;
     this.setState({ isVisible: toggle });
@@ -23,12 +24,15 @@ class DayCard extends Component {
       temperatureLow,
       clicked,
       isDesktop,
+      isSelected,
       dataForDay
     } = this.props;
 
-    const classes = isDesktop ? "border " : "border-bottom";
+    const active = isSelected ? "bg-light text-dark " : "";
+    const classes = isDesktop ? `border ${active}` : "border-bottom";
     return (
       <div
+        style={{ cursor: "pointer" }}
         className={`${classes} border-light m-1 p-2`}
         id={id}
         onClick={isDesktop ? clicked : this.handleClick}
@@ -38,7 +42,7 @@ class DayCard extends Component {
           style={{ minWidth: "5rem" }}
         >
           <h6 className="flex-fill">{day}</h6>
-          <WeatherIcon icon={icon} size={30} />
+          <WeatherIcon icon={icon} size={30} color={isSelected && "#343a40"} />
           <span className="mx-4 mx-md-0">
             <Temperature temp={temperatureHigh} size={"1.5rem"} />{" "}
             <Temperature temp={temperatureLow} size={"1rem"} />
