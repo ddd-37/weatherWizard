@@ -28,7 +28,6 @@ const getCircularReplacer = () => {
 
 app.get("/celestialdata", async (req, res) => {
   const { longitude, latitude } = req.query;
-  console.log("req.query", req.query);
   // We need 8 days worth of data to display for celestial data.  Darksyk doesn't give us everything we need to we need to head to ipgeolocation to get the missing bits
   // ipgeolocation requires a YYY-MM-DD format to their dates so let's set that up as an array
   const dates = [];
@@ -48,7 +47,6 @@ app.get("/celestialdata", async (req, res) => {
         );
       })
     ]);
-    console.log("celestialData", celestialData);
 
     // TODO - we've got a bunch of extra data, need to wittle it down a bit
     let celestial = JSON.stringify(celestialData, getCircularReplacer());
