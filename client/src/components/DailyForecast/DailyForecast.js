@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 
 class DailyForcast extends Component {
   state = {
-    weatherData: this.props.weatherData,
     displayData: this.props.weatherData[0],
     selectedDayId: 0,
     isDesktop: false
@@ -37,7 +36,8 @@ class DailyForcast extends Component {
   };
 
   render() {
-    const dayCards = this.state.weatherData.map((day, i) => {
+    console.log(this.props.weatherData);
+    const dayCards = this.props.weatherData.map((day, i) => {
       const dayText = moment(day.time * 1000).format("MMM D");
       const isSelected = i === this.state.selectedDayId;
       return (
@@ -48,7 +48,7 @@ class DailyForcast extends Component {
           icon={day.icon}
           temperatureHigh={day.temperatureHigh}
           temperatureLow={day.temperatureLow}
-          dataForDay={this.state.weatherData[i]}
+          dataForDay={this.props.weatherData[i]}
           isDesktop={this.state.isDesktop}
           isSelected={isSelected}
           clicked={this.handleClickOnDay}

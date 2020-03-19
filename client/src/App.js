@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 
 import "./App.css";
 import MainForecast from "./components/MainForecast/MainForecast";
@@ -16,6 +17,7 @@ class App extends Component {
   };
 
   componentDidMount() {
+    console.log("App -> componentDidMount -> componentDidMount");
     //Get the lat and long
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -29,13 +31,35 @@ class App extends Component {
     }
   }
 
+  handleSelectOnSearchBar = address => {
+    geocodeByAddress(address)
+      .then(results => getLatLng(results[0]))
+      .then(latLng => {
+        console.log("Success", latLng);
+        const { lat, lng } = latLng;
+        const position = {
+          coords: {
+            latitude: lat,
+            longitude: lng
+          }
+        };
+        this.setState({
+          loading: true
+        });
+        this.locationSuccess(position);
+      })
+      .catch(error => console.error("Error", error));
+  };
+
   locationSuccess = async position => {
+    console.log("App -> position", position);
     const { longitude, latitude } = position.coords;
 
     // Get all forcast data
     const forecastData = await axios.get(
       `/forecastdata?latitude=${latitude}&longitude=${longitude}`
     );
+    console.log("App -> forecastData", forecastData);
 
     const locationText = forecastData.data.location;
 
@@ -60,6 +84,7 @@ class App extends Component {
 
     // The sun and moon rise times come from our celestialData, need to append that to our weatherData obj here
     let weatherData = JSON.parse(forecastData.data.forecastData).data;
+    console.log("App -> weatherData", weatherData);
     weatherData.daily.data.forEach((item, i) => {
       item.sunrise = celestialData[i].sunrise;
       item.sunset = celestialData[i].sunset;
@@ -84,6 +109,7 @@ class App extends Component {
   };
 
   render() {
+    console.log("App -> render -> render");
     if (this.state.loading) {
       return (
         <div className="App d-flex justify-content-center align-items-center">
@@ -99,13 +125,17 @@ class App extends Component {
     }
 
     if (this.state.weatherData) {
+      console.log(
+        "App -> render -> this.state.weatherData",
+        this.state.weatherData
+      );
       return (
         <div className="App ">
           <header className="d-flex justify-content-between px-4 mb-4">
             <h1 className="font-weight-light flex-grow-2">
               Weather&nbsp;Wizard
             </h1>
-            <SearchBar />
+            <SearchBar onSelect={this.handleSelectOnSearchBar} />
           </header>
 
           <MainForecast
