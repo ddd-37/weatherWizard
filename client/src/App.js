@@ -4,6 +4,7 @@ import axios from "axios";
 import "./App.css";
 import MainForecast from "./components/MainForecast/MainForecast";
 import DailyForcast from "./components/DailyForecast/DailyForecast";
+import SearchBar from "./components/UI/SearchBar/SearchBar";
 
 class App extends Component {
   state = {
@@ -99,7 +100,14 @@ class App extends Component {
 
     if (this.state.weatherData) {
       return (
-        <div className="App container-fluid p-2">
+        <div className="App ">
+          <header className="d-flex justify-content-between px-4 mb-4">
+            <h1 className="font-weight-light flex-grow-2">
+              Weather&nbsp;Wizard
+            </h1>
+            <SearchBar />
+          </header>
+
           <MainForecast
             location={this.state.locationText}
             weatherData={this.state.weatherData.currently}
